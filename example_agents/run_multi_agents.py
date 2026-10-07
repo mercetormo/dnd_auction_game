@@ -6,6 +6,7 @@ import subprocess
 import sys
 from pathlib import Path
 from typing import List
+import time
 
 
 THIS_DIR = Path(__file__).resolve().parent
@@ -74,7 +75,7 @@ def launch_agents(num_agents: int, extra_args: List[str] | None = None) -> None:
                 signal.pause()
             except AttributeError:
                 # Windows: fall back to a simple blocking wait on the first process
-                procs[0].wait(timeout=1)
+                time.sleep(1)
     except KeyboardInterrupt:
         print("\nCtrl+C received, terminating agents...")
     finally:
